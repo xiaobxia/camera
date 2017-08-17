@@ -4,6 +4,7 @@
 class Camera {
   constructor(id, option) {
     this.$el = document.getElementById(id);
+    this.mediaStreamTrack = null;
     this.userSuccessCallback = option.successCallback;
     this.userErrorCallback = option.errorCallback;
   }
@@ -17,6 +18,7 @@ class Camera {
       this.userErrorCallback && this.userErrorCallback(err);
     };
     let successCallback = (stream) => {
+      this.mediaStreamTrack = stream.getTracks()[0];
       this.$el.src = windowUrl.createObjectURL(stream);
       this.userSuccessCallback && this.userSuccessCallback();
     };
@@ -28,6 +30,7 @@ class Camera {
   }
 
   destroy() {
+    this.mediaStreamTrack && this.mediaStreamTrack.stop();
     this.$el.src = '';
     //防止报错
     let self = this;

@@ -12,6 +12,7 @@ var Camera = function () {
     _classCallCheck(this, Camera);
 
     this.$el = document.getElementById(id);
+    this.mediaStreamTrack = null;
     this.userSuccessCallback = option.successCallback;
     this.userErrorCallback = option.errorCallback;
   }
@@ -31,6 +32,7 @@ var Camera = function () {
         _this.userErrorCallback && _this.userErrorCallback(err);
       };
       var successCallback = function successCallback(stream) {
+        _this.mediaStreamTrack = stream.getTracks()[0];
         _this.$el.src = windowUrl.createObjectURL(stream);
         _this.userSuccessCallback && _this.userSuccessCallback();
       };
@@ -43,6 +45,7 @@ var Camera = function () {
   }, {
     key: 'destroy',
     value: function destroy() {
+      this.mediaStreamTrack && this.mediaStreamTrack.stop();
       this.$el.src = '';
       //防止报错
       var self = this;
