@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>camera.js</title>
+  <script src="./camera.js"></script>
+</head>
+<body>
+<video id="myCamera" autoplay></video>
+<script>
+  var myCamera = new Camera('myCamera', {
+    successCallback: function () {
+      console.log('success');
+    },
+    errorCallback: function (err) {
+      console.log('error');
+    }
+  });
+  myCamera.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "camera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp --gulpfile ./gulpfile.production.js",
+    "example": "gulp --gulpfile ./gulpfile.example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaobxia/camera.git"
+  },
+  "author": "xiaobxia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaobxia/camera/issues"
+  },
+  "homepage": "https://github.com/xiaobxia/camera#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  }
+}
