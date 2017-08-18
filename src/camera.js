@@ -107,6 +107,12 @@
       };
     }
   }
-  window.Camera = Camera;
+  if (typeof module !== 'undefined' && typeof exports === 'object') {
+    module.exports = Camera;
+  } else {
+    window.Camera = Camera;
+  }
 })();
+
+
 
