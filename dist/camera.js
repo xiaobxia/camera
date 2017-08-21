@@ -113,7 +113,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     }, {
       key: 'shoot',
-      value: function shoot(option) {}
+      value: function shoot(option) {
+        var canvas = document.createElement('canvas');
+        canvas.width = "400";
+        canvas.height = "304";
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(this.$el, 0, 0, 400, 304);
+
+        document.getElementById('img').src = canvas.toDataURL("image/png");
+      }
 
       /*-------------------------  对外暴露的工具函数  -------------------------*/
 

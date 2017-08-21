@@ -70,8 +70,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.$el = document.getElementById(id);
       this.mediaStreamTrack = null;
-      this.userSuccessCallback = option.successCallback;
-      this.userErrorCallback = option.errorCallback;
+      this.imageSrcList = [];
     }
 
     /*-------------------------  自身方法  -------------------------*/
@@ -79,19 +78,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     _createClass(Camera, [{
       key: 'init',
-      value: function init() {
+      value: function init(success, error) {
         var _this = this;
 
         var windowUrl = this.windowUrl();
         var getUserMedia = this.getUserMedia();
         var errorCallback = function errorCallback(err) {
           console.log(err);
-          _this.userErrorCallback && _this.userErrorCallback(err);
+          error && error(err);
         };
         var successCallback = function successCallback(stream) {
           _this.mediaStreamTrack = stream.getTracks()[0];
           _this.$el.src = windowUrl.createObjectURL(stream);
-          _this.userSuccessCallback && _this.userSuccessCallback();
+          success && success();
         };
         try {
           getUserMedia({ video: true }, successCallback, errorCallback);
@@ -113,7 +112,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     }, {
       key: 'shoot',
-      value: function shoot(option) {}
+      value: function shoot(option, callback) {
+        var $el = this.$el;
+        var width = option.width || getStyle($el, 'width');
+        var height = option.height || getStyle($el, 'height');
+        console.log(typeof width === 'undefined' ? 'undefined' : _typeof(width));
+        console.log(width);
+        console.log(height);
+        var canvas = document.createElement('canvas');
+        canvas.width = "400";
+        canvas.height = "304";
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage($el, 0, 0, 400, 304);
+        var imageSrc = canvas.toDataURL("image/png");
+        this.imageSrcList.push(imageSrc);
+        callback && callback(imageSrc);
+      }
 
       /*-------------------------  对外暴露的工具函数  -------------------------*/
 

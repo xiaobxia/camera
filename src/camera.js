@@ -59,22 +59,21 @@
     constructor(id, option) {
       this.$el = document.getElementById(id);
       this.mediaStreamTrack = null;
-      this.userSuccessCallback = option.successCallback;
-      this.userErrorCallback = option.errorCallback;
+      this.imageSrcList = [];
     }
 
     /*-------------------------  自身方法  -------------------------*/
-    init() {
+    init(success, error) {
       const windowUrl = this.windowUrl();
       const getUserMedia = this.getUserMedia();
       let errorCallback = (err) => {
         console.log(err);
-        this.userErrorCallback && this.userErrorCallback(err);
+        error && error(err);
       };
       let successCallback = (stream) => {
         this.mediaStreamTrack = stream.getTracks()[0];
         this.$el.src = windowUrl.createObjectURL(stream);
-        this.userSuccessCallback && this.userSuccessCallback();
+        success && success();
       };
       try {
         getUserMedia({video: true}, successCallback, errorCallback);
@@ -92,7 +91,20 @@
     }
 
     /*-------------------------  拍摄方法  -------------------------*/
-    shoot(option) {
+    shoot(option, callback) {
+      let $el = this.$el;
+      let x = option.x;
+      let y = option.y;
+      let width = option.width || getStyle($el, 'width');
+      let height = option.height || getStyle($el, 'height');
+      let canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      let ctx = canvas.getContext('2d');
+      ctx.drawImage($el, x, y, -width, -height);
+      let imageSrc = canvas.toDataURL("image/png");
+      this.imageSrcList.push(imageSrc);
+      callback && callback(imageSrc);
     }
 
     /*-------------------------  对外暴露的工具函数  -------------------------*/
@@ -105,6 +117,14 @@
       return function (option, successCallback, errorCallback) {
         fn.call(navigator, option, successCallback, errorCallback);
       };
+    }
+
+    toCamelCase(str) {
+      return camelCase(str);
+    }
+
+    getStyle(el, styleName) {
+      return getStyle(el, styleName);
     }
   }
   if (typeof module !== 'undefined' && typeof exports === 'object') {

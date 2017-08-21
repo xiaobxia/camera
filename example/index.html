@@ -6,20 +6,24 @@
   <script src="./camera.js"></script>
 </head>
 <body>
-<video id="myCamera" autoplay></video>
+<video id="myCamera" autoplay style="width: 500px;height: 500px"></video>
+<img src="" alt="" id="img">
+<button id="btn">拍摄</button>
 <script>
-  var myCamera = new Camera('myCamera', {
-    successCallback: function () {
-      console.log('success');
-    },
-    errorCallback: function (err) {
-      console.log('error');
-    }
+  var myCamera = new Camera('myCamera');
+  myCamera.init(function () {
+    console.log('success');
+  },function (err) {
+    console.log('error');
   });
-  myCamera.init();
-  setTimeout(function () {
-    myCamera.destroy();
-  },9000);
+  btn.addEventListener('click', function () {
+    myCamera.shoot({}, function (imageSrc) {
+      document.getElementById('img').src = imageSrc;
+    });
+  }, false);
+//  setTimeout(function () {
+//    myCamera.destroy();
+//  },9000);
 </script>
 </body>
 </html>
