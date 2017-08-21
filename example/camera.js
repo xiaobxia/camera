@@ -20,7 +20,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return offset ? letter.toUpperCase() : letter;
     }).replace(MOZ_HACK_REGEXP, 'Moz$1');
   };
-  var getStyle = ieVersion < 9 ? function (element, styleName) {
+  var _getStyle = ieVersion < 9 ? function (element, styleName) {
     if (!element || !styleName) return null;
     styleName = camelCase(styleName);
     if (styleName === 'float') {
@@ -114,16 +114,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'shoot',
       value: function shoot(option, callback) {
         var $el = this.$el;
-        var width = option.width || getStyle($el, 'width');
-        var height = option.height || getStyle($el, 'height');
-        console.log(typeof width === 'undefined' ? 'undefined' : _typeof(width));
-        console.log(width);
-        console.log(height);
+        var x = option.x || 0;
+        var y = option.y || 0;
+        var width = option.width || _getStyle($el, 'width').slice(0, -2);
+        var height = option.height || _getStyle($el, 'height').slice(0, -2);
         var canvas = document.createElement('canvas');
-        canvas.width = "400";
-        canvas.height = "304";
+        canvas.width = width;
+        canvas.height = height;
         var ctx = canvas.getContext('2d');
-        ctx.drawImage($el, 0, 0, 400, 304);
+        ctx.drawImage($el, x, y, +width, +height);
         var imageSrc = canvas.toDataURL("image/png");
         this.imageSrcList.push(imageSrc);
         callback && callback(imageSrc);
@@ -143,6 +142,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return function (option, successCallback, errorCallback) {
           fn.call(navigator, option, successCallback, errorCallback);
         };
+      }
+    }, {
+      key: 'toCamelCase',
+      value: function toCamelCase(str) {
+        return camelCase(str);
+      }
+    }, {
+      key: 'getStyle',
+      value: function getStyle(el, styleName) {
+        return _getStyle(el, styleName);
       }
     }]);
 

@@ -93,15 +93,15 @@
     /*-------------------------  拍摄方法  -------------------------*/
     shoot(option, callback) {
       let $el = this.$el;
-      let x = option.x;
-      let y = option.y;
-      let width = option.width || getStyle($el, 'width');
-      let height = option.height || getStyle($el, 'height');
+      let x = option.x || 0;
+      let y = option.y || 0;
+      let width = option.width || getStyle($el, 'width').slice(0, -2);
+      let height = option.height || getStyle($el, 'height').slice(0, -2);
       let canvas = document.createElement('canvas');
       canvas.width = width;
       canvas.height = height;
       let ctx = canvas.getContext('2d');
-      ctx.drawImage($el, x, y, -width, -height);
+      ctx.drawImage($el, x, y, +width, +height);
       let imageSrc = canvas.toDataURL("image/png");
       this.imageSrcList.push(imageSrc);
       callback && callback(imageSrc);

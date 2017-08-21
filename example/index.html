@@ -19,6 +19,7 @@
   btn.addEventListener('click', function () {
     myCamera.shoot({}, function (imageSrc) {
       document.getElementById('img').src = imageSrc;
+      console.log(myCamera.imageSrcList)
     });
   }, false);
 //  setTimeout(function () {

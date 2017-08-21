@@ -20,7 +20,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return offset ? letter.toUpperCase() : letter;
     }).replace(MOZ_HACK_REGEXP, 'Moz$1');
   };
-  var getStyle = ieVersion < 9 ? function (element, styleName) {
+  var _getStyle = ieVersion < 9 ? function (element, styleName) {
     if (!element || !styleName) return null;
     styleName = camelCase(styleName);
     if (styleName === 'float') {
@@ -70,8 +70,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.$el = document.getElementById(id);
       this.mediaStreamTrack = null;
-      this.userSuccessCallback = option.successCallback;
-      this.userErrorCallback = option.errorCallback;
+      this.imageSrcList = [];
     }
 
     /*-------------------------  自身方法  -------------------------*/
@@ -79,19 +78,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     _createClass(Camera, [{
       key: 'init',
-      value: function init() {
+      value: function init(success, error) {
         var _this = this;
 
         var windowUrl = this.windowUrl();
         var getUserMedia = this.getUserMedia();
         var errorCallback = function errorCallback(err) {
           console.log(err);
-          _this.userErrorCallback && _this.userErrorCallback(err);
+          error && error(err);
         };
         var successCallback = function successCallback(stream) {
           _this.mediaStreamTrack = stream.getTracks()[0];
           _this.$el.src = windowUrl.createObjectURL(stream);
-          _this.userSuccessCallback && _this.userSuccessCallback();
+          success && success();
         };
         try {
           getUserMedia({ video: true }, successCallback, errorCallback);
@@ -113,14 +112,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     }, {
       key: 'shoot',
-      value: function shoot(option) {
+      value: function shoot(option, callback) {
+        var $el = this.$el;
+        var x = option.x || 0;
+        var y = option.y || 0;
+        var width = option.width || _getStyle($el, 'width').slice(0, -2);
+        var height = option.height || _getStyle($el, 'height').slice(0, -2);
         var canvas = document.createElement('canvas');
-        canvas.width = "400";
-        canvas.height = "304";
+        canvas.width = width;
+        canvas.height = height;
         var ctx = canvas.getContext('2d');
-        ctx.drawImage(this.$el, 0, 0, 400, 304);
-
-        document.getElementById('img').src = canvas.toDataURL("image/png");
+        ctx.drawImage($el, x, y, +width, +height);
+        var imageSrc = canvas.toDataURL("image/png");
+        this.imageSrcList.push(imageSrc);
+        callback && callback(imageSrc);
       }
 
       /*-------------------------  对外暴露的工具函数  -------------------------*/
@@ -137,6 +142,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return function (option, successCallback, errorCallback) {
           fn.call(navigator, option, successCallback, errorCallback);
         };
+      }
+    }, {
+      key: 'toCamelCase',
+      value: function toCamelCase(str) {
+        return camelCase(str);
+      }
+    }, {
+      key: 'getStyle',
+      value: function getStyle(el, styleName) {
+        return _getStyle(el, styleName);
       }
     }]);
 
