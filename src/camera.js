@@ -56,7 +56,7 @@
     }
   };
   class Camera {
-    constructor(id, option) {
+    constructor(id) {
       this.$el = document.getElementById(id);
       this.mediaStreamTrack = null;
       this.imageSrcList = [];
@@ -133,6 +133,3 @@
     window.Camera = Camera;
   }
 })();
-
-
-
