@@ -65,7 +65,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   };
 
   var Camera = function () {
-    function Camera(id, option) {
+    function Camera(id) {
       _classCallCheck(this, Camera);
 
       this.$el = document.getElementById(id);
