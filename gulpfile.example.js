@@ -7,14 +7,14 @@ const babel = require("gulp-babel");
 const del = require('del');
 
 const examplePath = './example/';
-const soourcePath = './src/';
+const sourcePath = './src/';
 
 gulp.task('clean_old_cameraJs', function () {
   return del(examplePath + 'camera.js');
 });
 //es5化camera.js
 gulp.task('es5_cameraJs', function () {
-  return gulp.src(soourcePath + 'camera.js')
+  return gulp.src(sourcePath + 'camera.js')
     .pipe(babel())
     .pipe(gulp.dest(examplePath));
 });
