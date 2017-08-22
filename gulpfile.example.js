@@ -22,7 +22,7 @@ gulp.task('es5_cameraJs', function () {
 gulp.task('server', function (cb) {
   browserSync({
     server: {
-      baseDir: examplePath,
+      baseDir: examplePath
     },
     port: 8080,
     notify: false,

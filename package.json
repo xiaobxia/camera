@@ -1,8 +1,8 @@
 {
   "name": "camera",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.2.0",
+  "description": "摄像头调用库，基于H5的api",
+  "main": "./dist/camera.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp --gulpfile ./gulpfile.production.js",
