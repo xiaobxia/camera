@@ -33,4 +33,4 @@
   - width
   - height
 - **callback**
-拍照成功的回调，参数是照片的base64
+> 拍照成功的回调，参数是照片的base64
