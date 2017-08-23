@@ -16,6 +16,7 @@
   },function (err) {
     console.log('error');
   });
+  var btn = document.getElementById('btn');
   btn.addEventListener('click', function () {
     myCamera.shoot({}, function (imageSrc) {
       document.getElementById('img').src = imageSrc;
