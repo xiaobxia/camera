@@ -3,10 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>camera.js</title>
+  <link rel="stylesheet" href="./camera.css">
   <script src="./camera.js"></script>
 </head>
 <body>
-<video id="myCamera" autoplay style="width: 500px;height: 500px"></video>
+<div class="xbx-camera-wrap">
+  <video id="myCamera" autoplay class="xbx-camera-video"></video>
+  <div class="xbx-camera-mask">
+    <button class="xbx-camera-shootBtn"></button>
+  </div>
+</div>
 <img src="" alt="" id="img">
 <button id="btn">拍摄</button>
 <script>

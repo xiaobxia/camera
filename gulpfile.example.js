@@ -4,10 +4,21 @@
 const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const babel = require("gulp-babel");
+const sass = require('gulp-sass');
 const del = require('del');
 
 const examplePath = './example/';
 const sourcePath = './src/';
+
+gulp.task('clean_old_cameraCss', function () {
+  return del(examplePath + 'camera.css');
+});
+
+gulp.task('scss_cameraScss', function () {
+  return gulp.src(sourcePath + 'camera.scss')
+    .pipe(sass())
+    .pipe(gulp.dest(examplePath));
+});
 
 gulp.task('clean_old_cameraJs', function () {
   return del(examplePath + 'camera.js');
@@ -31,5 +42,7 @@ gulp.task('server', function (cb) {
   }, cb);
 });
 
-gulp.task('default', gulp.series('clean_old_cameraJs', gulp.parallel('es5_cameraJs', 'server')));
+gulp.task('default', gulp.series(
+  gulp.parallel('clean_old_cameraJs', 'clean_old_cameraCss'),
+  gulp.parallel('es5_cameraJs', 'scss_cameraScss'), 'server'));
 
