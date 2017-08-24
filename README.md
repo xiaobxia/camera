@@ -1,6 +1,6 @@
 # camera
 摄像头调用库，基于H5的api
-### 使用
+## 使用
 - browser: window.Camera
 ```html
 <video id="myCamera" autoplay style="width: 500px;height: 500px"></video>
@@ -21,12 +21,12 @@
   }, false);
 </script>
 ```
-### 方法
+## 方法
 #### init([successCallback, errorCallback])
 初始化
 #### destroy()
 销毁
-#### shoot(option, callback)
+#### shoot([option, callback])
 - **option**
   - x
   - y
@@ -34,3 +34,12 @@
   - height
 - **callback**
 > 拍照成功的回调，参数是照片的base64
+## 工具
+#### windowUrl()
+返回浏览器兼容的window.URL对象
+#### getUserMedia()
+返回浏览器兼容的navigator.getUserMedia函数
+#### toCamelCase(str)
+字符串转驼峰
+#### getStyle(el, styleName)
+返回样式的值
