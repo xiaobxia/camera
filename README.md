@@ -3,6 +3,9 @@
 ## 使用
 - browser: window.Camera
 ```html
+<!--在head引入camera.js-->
+<script src="./camera.js"></script>
+<!--需要有用于初始化的video元素-->
 <video id="myCamera" autoplay style="width: 500px;height: 500px"></video>
 <img src="" alt="" id="img">
 <button id="btn">拍摄</button>
