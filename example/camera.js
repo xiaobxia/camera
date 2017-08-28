@@ -124,6 +124,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var ctx = canvas.getContext('2d');
         ctx.drawImage($el, x, y, +width, +height);
         var imageSrc = canvas.toDataURL("image/png");
+        canvas = null;
         this.imageSrcList.push(imageSrc);
         callback && callback(imageSrc);
       }

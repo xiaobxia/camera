@@ -103,6 +103,7 @@
       let ctx = canvas.getContext('2d');
       ctx.drawImage($el, x, y, +width, +height);
       let imageSrc = canvas.toDataURL("image/png");
+      canvas = null;
       this.imageSrcList.push(imageSrc);
       callback && callback(imageSrc);
     }
