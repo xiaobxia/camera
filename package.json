@@ -1,6 +1,6 @@
 {
   "name": "camera",
-  "version": "1.2.0",
+  "version": "0.0.0",
   "description": "摄像头调用库，基于H5的api",
   "main": "./dist/camera.js",
   "scripts": {
