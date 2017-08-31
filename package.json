@@ -1,6 +1,6 @@
 {
   "name": "camera",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "摄像头调用库，基于H5的api",
   "main": "./dist/camera.js",
   "scripts": {
@@ -25,9 +25,7 @@
     "del": "^3.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
-    "gulp-clean-css": "^3.7.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0"
   }
 }

@@ -3,23 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>camera.js</title>
-  <link rel="stylesheet" href="./camera.css">
   <script src="./camera.js"></script>
 </head>
 <body>
-<div class="xbx-camera-wrap">
-  <video id="myCamera" autoplay class="xbx-camera-video"></video>
-  <div class="xbx-camera-mask">
-    <button class="xbx-camera-shootBtn"></button>
-  </div>
-</div>
+<video id="myCamera" autoplay></video>
 <img src="" alt="" id="img">
 <button id="btn">拍摄</button>
 <script>
   var myCamera = new Camera('myCamera');
   myCamera.init(function () {
     console.log('success');
-  },function (err) {
+  }, function (err) {
     console.log('error');
   });
   var btn = document.getElementById('btn');
@@ -29,9 +23,9 @@
       console.log(myCamera.imageSrcList)
     });
   }, false);
-//  setTimeout(function () {
-//    myCamera.destroy();
-//  },9000);
+  //  setTimeout(function () {
+  //    myCamera.destroy();
+  //  },9000);
 </script>
 </body>
 </html>
