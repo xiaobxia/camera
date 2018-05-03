@@ -49,7 +49,7 @@
       styleName = 'cssFloat';
     }
     try {
-      let computed = document.defaultView.getComputedStyle(element, '');
+      const computed = document.defaultView.getComputedStyle(element, '');
       return element.style[styleName] || computed ? computed[styleName] : null;
     } catch (e) {
       return element.style[styleName];
@@ -66,11 +66,11 @@
     init(success, error) {
       const windowUrl = this.windowUrl();
       const getUserMedia = this.getUserMedia();
-      let errorCallback = (err) => {
+      const errorCallback = (err) => {
         console.log(err);
         error && error(err);
       };
-      let successCallback = (stream) => {
+      const successCallback = (stream) => {
         this.mediaStreamTrack = stream.getTracks()[0];
         this.$el.src = windowUrl.createObjectURL(stream);
         success && success();
@@ -92,17 +92,17 @@
 
     /*-------------------------  拍摄方法  -------------------------*/
     shoot(option, callback) {
-      let $el = this.$el;
-      let x = option.x || 0;
-      let y = option.y || 0;
-      let width = option.width || getStyle($el, 'width').slice(0, -2);
-      let height = option.height || getStyle($el, 'height').slice(0, -2);
+      const $el = this.$el;
+      const x = option.x || 0;
+      const y = option.y || 0;
+      const width = option.width || getStyle($el, 'width').slice(0, -2);
+      const height = option.height || getStyle($el, 'height').slice(0, -2);
       let canvas = document.createElement('canvas');
       canvas.width = width;
       canvas.height = height;
-      let ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d');
       ctx.drawImage($el, x, y, +width, +height);
-      let imageSrc = canvas.toDataURL("image/png");
+      const imageSrc = canvas.toDataURL("image/png");
       canvas = null;
       this.imageSrcList.push(imageSrc);
       callback && callback(imageSrc);
@@ -114,7 +114,7 @@
     }
 
     getUserMedia() {
-      let fn = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+      const fn = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
       return function (option, successCallback, errorCallback) {
         fn.call(navigator, option, successCallback, errorCallback);
       };
